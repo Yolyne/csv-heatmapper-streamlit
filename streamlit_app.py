@@ -3,8 +3,6 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import math
-import io
-import base64
 
 if "x_interval_list" not in st.session_state:
     st.session_state.x_interval_list = [0]
