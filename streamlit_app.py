@@ -1,3 +1,13 @@
+"""
+streamlit_app.py
+
+Copyright (c) 2022 yoririn
+
+This software is released under the MIT license.
+See https://opensource.org/licenses/MIT
+
+"""
+
 import streamlit as st
 import pandas as pd
 import matplotlib as mpl
