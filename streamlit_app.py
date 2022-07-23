@@ -16,6 +16,8 @@ import math
 import io
 import pickle
 import time
+from PIL import Image
+
 
 if "x_interval_list" not in st.session_state:
     st.session_state.x_interval_list = [0]
@@ -188,13 +190,30 @@ def pickle_figinfo(figinfo):
     pickle.dump(figinfo, data)
     return data
 
-# tab1, tab2 = st.tabs(["Main", "Color maps"])
-# with tab1:
-st.title("CsvHeatmapper")
+
+title = "CsvHeatmapper"
+icon = Image.open("icon.ico")
+st.set_page_config(
+    page_title=title,
+    page_icon=icon,
+    layout="wide"
+)
+col1, col2 = st.columns([1, 9])
+with col1:
+    st.image(icon)
+with col2:
+    st.title(title)
+st.markdown(
+    """
+    1. Upload a csv-like file
+    2. Determine how the heatmap is displayed
+    3. Click "Draw"
+    4. Save the image or the work file
+    """
+)
 uploaded_file = st.file_uploader("Choose a CSV-like file", type=[".csv", ".xlsx", ".chwk"], on_change=update_form, key="uploaded_file")
 
 with st.form(key="draw_form"):
-    # col1, col2, col3 = st.columns(3)
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         st.subheader("Axis scale")
@@ -247,19 +266,3 @@ if st.session_state.fig:
         data=pickle_figinfo(st.session_state.fig_info),
         file_name="image.chwk",
         )
-# with tab2:
-#     with open("cm.png", "rb") as img:
-#         encoded_string = base64.b64encode(img.read())
-#         page_bg_img = f'''
-#         <style>
-#         .stApp {{
-#         background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
-#         background-repeat: no-repeat;
-#         background-position: center;
-#         background-size: 85%;
-#         }}
-#         </style>
-#         '''
-#         st.markdown(page_bg_img, unsafe_allow_html=True)
-
-#     st.radio("Color Map", [i for i in range(28)], horizontal=True)
