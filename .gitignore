@@ -1,3 +1,6 @@
 /Lib
 /Scripts
+/etc
+/share
 sample.py
+pyvenv.cfg
